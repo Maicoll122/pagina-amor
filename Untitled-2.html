@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>PARA EL AMOR DE MI VIDA❤️</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            overflow-x: hidden;
+            text-align: center;
+        }
+
+        /* BOTÓN DE MÚSICA */
+        #playBtn {
+            margin-top: 20px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #ff4f70;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        /* SLIDESHOW */
+        .slideshow {
+            width: 330px;
+            height: 330px;
+            margin: 30px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 20px #ff4f70;
+        }
+        .slideshow img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* SOBRE Y CARTA */
+        .envelope {
+            width: 220px;
+            height: 150px;
+            background: #ff6b81;
+            margin: 30px auto;
+            border-radius: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+        .envelope .top {
+            width: 100%;
+            height: 75px;
+            background: #ff4f70;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+        }
+        .envelope .bottom {
+            width: 100%;
+            height: 75px;
+            background: #ff6b81;
+        }
+
+        .letter {
+            width: 80%;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            display: none;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            font-size: 18px;
+            text-align: justify;
+        }
+
+        /* CORAZONES FLOTANDO */
+        .heart {
+            position: fixed;
+            color: #ff1e6e;
+            font-size: 24px;
+            animation: floatUp 6s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(1); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1 style="margin-top: 20px;">PARA LA NIÑA QUE MAS QUIEROOO ❤️</h1>
+
+   <button id="playBtn">🎵 Reproducir canción</button>
+
+<audio id="player" src="C:\Users\mnoro\Downloads\Phone Link\mp3\Camila _ Todo Cambió [Letra](MP3_160K).mp3"></audio>
+
+<script>
+  document.getElementById("playBtn").addEventListener("click", function () {
+    document.getElementById("player").play();
+  });
+</script>
+
+    <!-- SLIDESHOW -->
+    <div class="slideshow">
+        <img id="slide" src="images/foto1.jpg">
+    </div>
+
+    <!-- SOBRE -->
+    <div class="envelope" id="openLetter">
+        <div class="top"></div>
+        <div class="bottom"></div>
+    </div>
+
+    <!-- CARTA -->
+    <div class="letter" id="letterText"></div>
+
+    <script>
+        /* MÚSICA */
+        document.getElementById("playBtn").addEventListener("click", () => {
+            document.getElementById("music").play();
+        });
+
+        /* SLIDESHOW AUTOMÁTICO */
+        let fotos = [
+    "images/IMG_20260101_233900.png",
+    "images/IMG-20260110-WA0007.jpg",
+    "images/IMG-20260110-WA0018.jpg",
+    "images/IMG-20260124-WA0002.jpg",
+    "images/IMG-20260124-WA0006.jpg"
+];
+
+        let index = 0;
+
+        setInterval(() => {
+            index = (index + 1) % fotos.length;
+            document.getElementById("slide").src = fotos[index];
+        }, 3000);
+
+        /* MENSAJE DE LA CARTA (CORREGIDO) */
+        let mensaje = "No me enamoré de ti porque necesitaba una relación, me enamoré de ti porque por primera vez sentí el verdadero amor. Me enamoré de tu sonrisa, de la forma en la que hiciste sonreír a mi corazón, de la manera en la que conectamos de forma única. A veces somos dos loquitos que sin importar el día siempre estamos jugando o riendo, y eso es lo que hace especial estar contigo. Te amaré en esta y en mil vidas más, porque aunque las personas no lo entiendan... me enamoré de la forma más sincera y verdadera posible.";
+
+        /* EFECTO DE ESCRITURA */
+        document.getElementById("openLetter").addEventListener("click", () => {
+            let carta = document.getElementById("letterText");
+            carta.style.display = "block";
+            carta.innerHTML = "";
+            let i = 0;
+
+            function escribir() {
+                if (i < mensaje.length) {
+                    carta.innerHTML += mensaje.charAt(i);
+                    i++;
+                    setTimeout(escribir, 40);
+                }
+            }
+            escribir();
+        });
+
+        /* CORAZONES */
+        function crearCorazon() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        setInterval(crearCorazon, 300);
+    </script>
+
+</body>
+</html>
